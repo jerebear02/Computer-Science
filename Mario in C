@@ -1,0 +1,42 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int h;
+
+    // Prompt for height between 1 and 8 inclusive
+    do
+    {
+        h = get_int("Height: ");
+    }
+    while (h < 1 || h > 8);
+
+    // Print the double pyramid
+    for (int row = 0; row < h; row++)
+    {
+        // Left spaces
+        for (int s = 0; s < (h - row - 1); s++)
+        {
+            printf(" ");
+        }
+
+        // Left hashes
+        for (int hash = 0; hash < (row + 1); hash++)
+        {
+            printf("#");
+        }
+
+        // Gap (always 2 spaces)
+        printf("  ");
+
+        // Right hashes
+        for (int hash = 0; hash < (row + 1); hash++)
+        {
+            printf("#");
+        }
+
+        // New line
+        printf("\n");
+    }
+}
