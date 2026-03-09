@@ -1,0 +1,47 @@
+def main():
+    number = get_number()
+    if luhn(number):
+        print(card_type(number))
+    else:
+        print("INVALID")
+
+
+def get_number():
+    while True:
+        try:
+            n = int(input("Number: "))
+            if n > 0:
+                return n
+        except ValueError:
+            pass
+
+
+def luhn(number):
+    digits = [int(d) for d in str(number)]
+    digits.reverse()
+    total = 0
+    for i, d in enumerate(digits):
+        if i % 2 == 1:
+            d *= 2
+            if d > 9:
+                d -= 9
+        total += d
+    return total % 10 == 0
+
+
+def card_type(number):
+    s = str(number)
+    length = len(s)
+    first_two = int(s[:2])
+
+    if length == 15 and first_two in [34, 37]:
+        return "AMEX"
+    elif length == 16 and 51 <= first_two <= 55:
+        return "MASTERCARD"
+    elif length in [13, 16] and s[0] == "4":
+        return "VISA"
+    else:
+        return "INVALID"
+
+
+main()
